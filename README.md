@@ -1,7 +1,15 @@
-# RoRRandomizer
-Adds a survivor, skill, and artifact randomizer
+# RoRRRandomizer
+Adds a survivor, skill, and artifact randomizer when you start a game
+You can set the mod options via ImGui ("INSERT" key) or by editing the it manually (found at ReturnOfModding/config/RoRRRandomizer/cfg.toml)
 
 ---
+
+## Disclaimer
+This mod doesn't choose the random skills intelligently, using some skills can do nothing or lead to crashes.
+
+Runs played with this mod are saved under the character that was selected in the lobby, not the random one set by the randomizer.
+
+This mod hasn't been tested in multiplayer, but it should probably work as the Host
 
 ## Installation Instructions
 This mod depends on the [Return Of Modding](https://github.com/return-of-modding/ReturnOfModding) loader:
@@ -15,3 +23,4 @@ This mod depends on the [Return Of Modding](https://github.com/return-of-modding
 
 ## Contact
 For questions or bug reports, you can find us in the [RoRR Modding Server](https://discord.gg/VjS57cszMq) @Miguelito @Umigatari
+
