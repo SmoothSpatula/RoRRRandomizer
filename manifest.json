@@ -1,0 +1,9 @@
+﻿{
+	"name": "RoRRRandomizer",
+	"version_number": "1.0.0",
+	"website_url": "",
+	"description": "Randomizes character, skills and artifacts when you enter a run",
+	"dependencies": [
+		"ReturnOfModding-ReturnOfModding-1.0.0"
+	]
+}
