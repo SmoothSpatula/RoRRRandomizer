@@ -71,8 +71,6 @@ gui.add_to_menu_bar(function()
     end
 end)
 
-
-
 -- ========== Utils ==========
 
 function array_shuffle(x)
@@ -91,7 +89,6 @@ function get_rand_list(min_id, max_id, n)
     array_shuffle(ar)
     return ar
 end
-
 
 -- ========== Main ==========
 
