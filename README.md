@@ -10,6 +10,8 @@ You can set the mod options via ImGui ("INSERT" key) or by editing the it manual
 * This mod hasn't been tested in multiplayer, but it should probably work as the Host.
 
 ## Installation Instructions
+
+* If you are not using the mod manager, you will need manually create a "ReturnOfModding/config/RoRRRandomizer" folder for the config.
 This mod depends on the [Return Of Modding](https://github.com/return-of-modding/ReturnOfModding) loader:
 1. Download the [latest Return Of Modding release](https://github.com/return-of-modding/ReturnOfModding/releases) and follow the [Manual Installation instructions](https://github.com/return-of-modding/ReturnOfModding#manual-installation) to install it.
 2. Download this mod and extract it into the `ReturnOfModding/plugins` folder.
