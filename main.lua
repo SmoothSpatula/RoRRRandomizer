@@ -68,7 +68,7 @@ gui.add_to_menu_bar(function()
     local new_value, isChanged = ImGui.InputInt("Set of random artifacts", params['nb_arti'], 1, 2, 0)
     if isChanged and new_value<=max_artis and new_value >= 0 then
         params ['nb_arti'] = new_value
-        Toml.save_cfg(_ENV["!guid"].."/cfg.toml", params)
+        Toml.save_cfg(_ENV["!guid"], params)
     end
 end)
 
