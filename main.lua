@@ -1,4 +1,4 @@
--- RoRR Randomizer v1.0.0
+-- RoRR Randomizer v1.0.1
 -- SmoothSpatula
 
 Toml = require("tomlHelper")
@@ -22,9 +22,10 @@ local default_params = {
     nb_arti = 4 -- number of artifacts to roll
 }
 
-local params = Toml.load_cfg(_ENV["!guid"].."/cfg.toml")
+local params = Toml.load_cfg(_ENV["!guid"])
+
 if not params then
-   Toml.save_cfg(_ENV["!guid"].."/cfg.toml", default_params)
+   Toml.save_cfg(_ENV["!guid"], default_params)
    params = default_params
 end
 
@@ -35,21 +36,21 @@ gui.add_to_menu_bar(function()
     local new_value, clicked = ImGui.Checkbox("Random character", params['randomize_character'])
     if clicked then
         params['randomize_character'] = new_value
-        Toml.save_cfg(_ENV["!guid"].."/cfg.toml", params)
+        Toml.save_cfg(_ENV["!guid"], params)
     end
 end)
 gui.add_to_menu_bar(function()
     local new_value, clicked = ImGui.Checkbox("Random skills", params['randomize_skills'])
     if clicked then
         params['randomize_skills'] = new_value
-        Toml.save_cfg(_ENV["!guid"].."/cfg.toml", params)
+        Toml.save_cfg(_ENV["!guid"], params)
     end
 end)
 gui.add_to_menu_bar(function()
     local new_value, clicked = ImGui.Checkbox("Random artifacts", params['randomize_artifacts'])
     if clicked then
         params['randomize_artifacts'] = new_value
-        Toml.save_cfg(_ENV["!guid"].."/cfg.toml", params)
+        Toml.save_cfg(_ENV["!guid"], params)
     end
 end)
 
