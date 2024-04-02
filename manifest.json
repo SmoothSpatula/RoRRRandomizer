@@ -1,6 +1,6 @@
 ﻿{
 	"name": "RoRRRandomizer",
-	"version_number": "1.0.0",
+	"version_number": "1.0.1",
 	"website_url": "https://github.com/SmoothSpatula/SmoothSpatula-RoRRRandomizer",
 	"description": "Randomizes character, skills and artifacts when you enter a run.",
 	"dependencies": [
