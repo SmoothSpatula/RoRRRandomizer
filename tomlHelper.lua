@@ -24,7 +24,7 @@ self.save_cfg = function (plugin_path, table)
 
     if gm.directory_exists(create_dir_path) ==.0 then
         log.info("Creating config directory")
-        log.info(gm.directory_create(create_dir_path))
+        gm.directory_create(create_dir_path)
     end
     local full_path = cfg_path..plugin_path..cfg_name
     succeeded, documentOrErrorMessage = pcall(toml.encodeToFile, table, { file = full_path, overwrite = true })
@@ -32,7 +32,6 @@ self.save_cfg = function (plugin_path, table)
         print(documentOrErrorMessage)
         return nil
     end
-    log.info("config file successfully created")
     return 0
 end
 
