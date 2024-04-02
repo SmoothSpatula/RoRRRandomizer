@@ -1,4 +1,4 @@
--- RoRR Randomizer v1.0.1
+-- RoRR Randomizer v1.0.2
 -- SmoothSpatula
 
 Toml = require("tomlHelper")
@@ -108,6 +108,7 @@ function set_random_char()
                 local rnd_skills = get_rand_list(params['min_skill'], params['max_skill'], params['nb_skill'])
                 for i = 1, params['nb_skill'] do
                     gm.actor_skill_set(inst, i-1, rnd_skills[i])
+		    log.info("skill "..i.." : id = "..rnd_skills[i])
                 end
             end
             --set random artifacts
