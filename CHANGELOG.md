@@ -6,3 +6,4 @@
 
 ### v1.0.2
 * Fixed config directory not being created when not using modmanager
+* Added a log message to identify broken skills
