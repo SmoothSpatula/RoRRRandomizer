@@ -6,6 +6,7 @@ You can set the mod options via ImGui ("INSERT" key) or by editing the it manual
 
 ## Disclaimer
 * This mod doesn't choose the random skills intelligently, using some skills can do nothing or lead to crashes.
+* You can help with testing this by noting down and notifying me of broken skills (the skill id should appear in the console).
 * Runs played with this mod are saved under the character that was selected in the lobby, not the random one set by the randomizer.
 * This mod hasn't been tested in multiplayer, but it should probably work as the Host and randomize all players.
 
