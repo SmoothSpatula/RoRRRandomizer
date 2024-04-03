@@ -11,7 +11,7 @@
 * This mod doesn't choose the random skills intelligently, using some skills can do nothing or lead to crashes.
 * You can help with testing this by noting down and notifying me of broken skills (the skill id should appear in the console).
 * Runs played with this mod are saved under the character that was selected in the lobby, not the random one set by the randomizer.
-* This mod hasn't been tested in multiplayer, but it should probably work for the Host and randomize all players.
+* This mod does not function properly in multiplayer, it does'nt crash but clients are completely out of sync.
 
 ## Installation Instructions
 
