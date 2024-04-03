@@ -20,8 +20,7 @@ self.load_cfg = function(plugin_path)
     return table
 end
 
-self.save_cfg = function (plugin_path, table)
-
+self.save_cfg = function (plugin_path, table)  
     if gm.directory_exists(create_dir_path) ==.0 then
         log.info("Creating config directory")
         gm.directory_create(create_dir_path)
