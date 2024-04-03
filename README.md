@@ -20,7 +20,7 @@
 2. Download this mod and extract it into the `ReturnOfModding/plugins` folder.
 3. The mod should now be loaded. Enjoy!
 
-* If you want to manually edit your config file, you can find in the `ReturnOfModding/config/RoRRRandomizer` folder.
+* If you want to manually edit your config file, you can it find in the `ReturnOfModding/config/RoRRRandomizer` folder.
   
 ## Special Thanks To
 * Molk for the idea
