@@ -159,15 +159,15 @@ function set_random_char()
                     log.info("skill "..i.." : id = "..rnd_skills[i])
                 end
             end
-            --set random artifacts
-            if params['randomize_artifacts'] then
-                local rnd_arti = get_rand_list(params['min_arti'], params['max_arti'], params['nb_arti'])
-                for i = 1, params['nb_arti'] do
-                    local artifact = gm.variable_global_get("class_artifact")[rnd_arti[i]]
-                    gm.array_set(artifact, 8, true)
-                    gm.chat_add_message(gm["@@NewGMLObject@@"](gm.constants.ChatMessage, tostring(artifact[2])))
-                end
-            end
+        end
+    end
+    --set random artifacts
+    if params['randomize_artifacts'] then
+        local rnd_arti = get_rand_list(params['min_arti'], params['max_arti'], params['nb_arti'])
+        for i = 1, params['nb_arti'] do
+            local artifact = gm.variable_global_get("class_artifact")[rnd_arti[i]]
+            gm.array_set(artifact, 8, true)
+            gm.chat_add_message(gm["@@NewGMLObject@@"](gm.constants.ChatMessage, tostring(artifact[2])))
         end
     end
 end
