@@ -1,7 +1,7 @@
--- RoRR Randomizer v1.0.3
+-- RoRR Randomizer v1.0.4
 -- SmoothSpatula
 
-Toml = require("tomlHelper")
+mods.on_all_mods_loaded(function() for k, v in pairs(mods) do if type(v) == "table" and v.tomlfuncs then Toml = v end end end)
 
 -- ========== Parameters ==========
 
@@ -10,32 +10,36 @@ local MAX_SKILL = 4
 local is_init = false
 local params = {}
 
-function late_init()   
-    params = Toml.load_cfg(_ENV["!guid"])
+function late_init()
+    params = {
+        randomize_character = true,
+        randomize_skills = true,
+        randomize_artifacts = false,
     
-    if not params then
-        local default_params = {
-            randomize_character = true,
-            randomize_skills = true,
-            randomize_artifacts = true,
-        
-            min_skill = 1, --skill 0 is no skill
-            max_skill = 143, --max skill id 205, max survivor skill id 143
-            nb_skill = 4, -- number of skills to roll
-        
-            min_arti = 1, --min artifact  is id 1
-            max_arti = 14, --max artifact is id 14
-            nb_arti = 4,  -- number of artifacts to roll
-            skill = get_skills(1,143)
-        }
-        Toml.save_cfg(_ENV["!guid"], default_params)
-        params = default_params
+        min_skill = 1, --skill 0 is no skill
+        max_skill = 143, --max skill id 205, max survivor skill id 143
+        nb_skill = 4, -- number of skills to roll
+    
+        min_arti = 1, --min artifact  is id 1
+        max_arti = 14, --max artifact is id 14
+        nb_arti = 4,  -- number of artifacts to roll
+        skill = get_skills(1,143)
+    }
+
+    -- disable bugged/unusable skills
+    local bugged_skills = {1,57,58,59,62,63,39,43,44,45,69,70,71,129,131,132,133,135,136}
+    for i= 1, #bugged_skills do
+        params['skill'][tostring(i)].enabled = false
     end
+
+
+    params = Toml.config_update(_ENV["!guid"], params)
     --[[ Sanity check
     for i = params['min_skill'] , params['max_skill'] do
         print(i.." "..params['skill'][i..''].name.."  "..tostring(params['skill'][i..''].enabled))
     end 
     ]]
+    
     -- add skill enable gui
     
     gui.add_to_menu_bar(function()
@@ -48,14 +52,25 @@ function late_init()
             end
         end
     end)
-    
-    
+
 end
 
 -- ========== Utils ==========
 
--- create random_array
-function get_rand_list(min_id, max_id, n)
+-- If you have a better algorithm pls let me know
+function fast_rnd_pick(ar, n)
+    local rnd_ar = {}
+    local count = #ar
+    for i = 1, n do 
+        local rnd_nb = math.random(1, count)
+        rnd_ar[i] = ar[rnd_nb]
+        ar[rnd_nb] = ar[count]
+        count = count-1
+    end
+    return rnd_ar
+end
+
+function get_rand_skills(n)
     local ar = {}
     local count = 0
     -- get all enabled skills
@@ -65,16 +80,22 @@ function get_rand_list(min_id, max_id, n)
             ar[count] = i
         end
     end
-    -- fast random pick
-    local rnd_ar = {}
-    for i = 1, n do 
-        local rnd_nb = math.random(1, count)
-        rnd_ar[i] = ar[rnd_nb]
-        ar[rnd_nb] = ar[count]
-        count = count-1
-    end
-    return rnd_ar
+    return fast_rnd_pick(ar, n)
 end
+
+function get_rand_artifacts(n)
+    local ar = {}
+    local count = 0
+    -- get all artifacts
+    for i = params['min_arti'], params['max_arti'] do
+        count = count+1
+        ar[count] = i
+    end
+    return fast_rnd_pick(ar, n)
+end
+
+
+
 
 function get_skills(min_id, max_id)
     local skills = gm.variable_global_get("class_skill")
@@ -124,7 +145,7 @@ end)
 ]]
 
 gui.add_to_menu_bar(function()
-    local new_value, isChanged = ImGui.InputInt("Set of random artifacts", params['nb_arti'], 1, 2)
+    local new_value, isChanged = ImGui.InputInt("Number of random artifacts", params['nb_arti'], 1, 2)
     if isChanged and new_value <= MAX_ARTI and new_value >= 0 then
         params ['nb_arti'] = new_value
         Toml.save_cfg(_ENV["!guid"], params)
@@ -143,31 +164,33 @@ end)
 
 -- for all players (if you're randomizing you're also randomizing your friends)
 function set_random_char()
+    --set random artifacts
+    if params['randomize_artifacts'] then
+        local rnd_arti = get_rand_artifacts(params['nb_arti'])
+        for i = 1, params['nb_arti'] do
+            local artifact = gm.variable_global_get("class_artifact")[rnd_arti[i]]
+            gm.array_set(artifact, 8, true)
+            print("artifact of "..tostring(artifact[2]))
+            gm.chat_add_message(gm["@@NewGMLObject@@"](gm.constants.ChatMessage, "artifact of "..tostring(artifact[2])))
+        end
+    end
     for i = 1, #gm.CInstance.instances_active do
         local inst = gm.CInstance.instances_active[i]
         if inst.object_index == gm.constants.oP then
             --set random survivor
             if params['randomize_character'] then
-                local rnd_survivor = math.random(1,15)
+                local rnd_survivor = math.random(0,15)
+                rnd_survivor = 0
                 gm.player_set_class(inst, rnd_survivor)
             end
             --set random player skills
             if params['randomize_skills'] then
-                local rnd_skills = get_rand_list(params['min_skill'], params['max_skill'], params['nb_skill'])
+                local rnd_skills = get_rand_skills(params['nb_skill'])
                 for i = 1, params['nb_skill'] do
                     gm.actor_skill_set(inst, i-1, rnd_skills[i])
                     log.info("skill "..i.." : id = "..rnd_skills[i])
                 end
             end
-        end
-    end
-    --set random artifacts
-    if params['randomize_artifacts'] then
-        local rnd_arti = get_rand_list(params['min_arti'], params['max_arti'], params['nb_arti'])
-        for i = 1, params['nb_arti'] do
-            local artifact = gm.variable_global_get("class_artifact")[rnd_arti[i]]
-            gm.array_set(artifact, 8, true)
-            gm.chat_add_message(gm["@@NewGMLObject@@"](gm.constants.ChatMessage, tostring(artifact[2])))
         end
     end
 end
