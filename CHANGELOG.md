@@ -16,3 +16,6 @@
 * Tested all skills as commando, skill that crash the game are now disabled by default
 * Fixed the artifact randomizer not working
 * Changed the TomlHelper from a local file to a dependency 
+
+### v1.0.5
+* Small oversight
