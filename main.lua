@@ -1,4 +1,4 @@
--- RoRR Randomizer v1.0.4
+-- RoRR Randomizer v1.0.5
 -- SmoothSpatula
 
 mods.on_all_mods_loaded(function() for k, v in pairs(mods) do if type(v) == "table" and v.tomlfuncs then Toml = v end end end)
@@ -27,13 +27,13 @@ function late_init()
     }
 
     -- disable bugged/unusable skills
+    params = Toml.config_update(_ENV["!guid"], params)
+
     local bugged_skills = {1,57,58,59,62,63,39,43,44,45,69,70,71,129,131,132,133,135,136}
     for i= 1, #bugged_skills do
-        params['skill'][tostring(i)].enabled = false
+        params['skill'][tostring(bugged_skills[i])].enabled = false
     end
-
-
-    params = Toml.config_update(_ENV["!guid"], params)
+    Toml.save_cfg(_ENV["!guid"], params)
     --[[ Sanity check
     for i = params['min_skill'] , params['max_skill'] do
         print(i.." "..params['skill'][i..''].name.."  "..tostring(params['skill'][i..''].enabled))
