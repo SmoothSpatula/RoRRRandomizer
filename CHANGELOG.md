@@ -22,3 +22,4 @@
 
 ### v1.0.6
 * Disabled to the stars, starbound, snipe and quickscope, which may crash in certain situations
+* Purple menu text
