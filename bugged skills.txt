@@ -1,0 +1,32 @@
+Tested with commando : 
+
+skills that crash the game
+    57 - crush
+    58 - drill charge
+    59 - backblast
+    62 - throwing axe
+    63 - drill dash
+
+skills that send an error but don't always crash
+    60 - to the stars (still jumps)
+    61 - starbound (still jumps)
+    65 - snipe
+    73 - quickscope (I don't know what's happening)
+
+special skills that are not enabled usually
+    39 - drone heal
+    43 - drone speed 
+    44 - drone vent
+    45 - drone blast
+
+skills that mostly do nothing
+    70 reload
+    69 - spotter isolate and 71-spotter recall don't do anything without a spotter
+
+skill needing scrap to work (provided by 130 -  suffocate)
+    129 - cleanup
+    131 - salvage
+    132 - recover
+    133 - scrap cube
+    135 - scrap cube
+    136 - rebuild all
