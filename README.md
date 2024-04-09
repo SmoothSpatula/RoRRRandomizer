@@ -1,7 +1,7 @@
 # RoRRRandomizer
 Adds a survivor, skill, and artifact randomizer when you start a game.
 
-You can set the mod options via ImGui ("INSERT" key) or by editing the it manually (found at ReturnOfModding/config/RoRRRandomizer/cfg.toml).
+You can set the mod options via ImGui ("INSERT" key) or by editing `ReturnOfModding/config/RoRRRandomizer/cfg.toml`.
 
 You can enable/disable skills in the ImGui settings. 
 
@@ -21,8 +21,6 @@ You can make a custom build by enabling only 4 skills.
 1. Download the [latest Return Of Modding release](https://github.com/return-of-modding/ReturnOfModding/releases) and follow the [Manual Installation instructions](https://github.com/return-of-modding/ReturnOfModding#manual-installation) to install it.
 2. Download this mod and extract it into the `ReturnOfModding/plugins` folder.
 3. The mod should now be loaded. Enjoy!
-
-* If you want to manually edit your config file, you can it find in the `ReturnOfModding/config/RoRRRandomizer` folder.
   
 ## Special Thanks To
 * Molk for the idea
