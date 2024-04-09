@@ -23,3 +23,6 @@
 ### v1.0.6
 * Disabled to the stars, starbound, snipe and quickscope, which may crash in certain situations
 * Purple menu text
+
+### v1.0.7
+* If you liked playing commando every game, too bad because it is fixed
