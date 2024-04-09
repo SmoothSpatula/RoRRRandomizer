@@ -1,4 +1,4 @@
--- RoRR Randomizer v1.0.6
+-- RoRR Randomizer v1.0.7
 -- SmoothSpatula
 
 mods.on_all_mods_loaded(function() for k, v in pairs(mods) do if type(v) == "table" and v.tomlfuncs then Toml = v end end end)
@@ -181,7 +181,6 @@ function set_random_char()
             --set random survivor
             if params['randomize_character'] then
                 local rnd_survivor = math.random(0,15)
-                rnd_survivor = 0
                 gm.player_set_class(inst, rnd_survivor)
             end
             --set random player skills
