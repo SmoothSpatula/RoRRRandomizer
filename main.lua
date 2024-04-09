@@ -29,7 +29,7 @@ function late_init()
     -- disable bugged/unusable skills
     params = Toml.config_update(_ENV["!guid"], params)
 
-    local bugged_skills = {1,57,58,59,60,61,62,63,65,39,43,44,45,69,70,71,73,129,131,132,133,135,136}
+    local bugged_skills = {1,57,58,59,62,63,39,43,44,45,69,70,71,129,131,132,133,135,136}
     for i= 1, #bugged_skills do
         params['skill'][tostring(bugged_skills[i])].enabled = false
     end
@@ -43,6 +43,7 @@ function late_init()
     -- add skill enable gui
     
     gui.add_to_menu_bar(function()
+        ImGui.TextColored(1, 0.5, 1, 1, "-- Enable/Disable skills --")
         for i = params['min_skill'], params['max_skill'] do
             local c = "  " 
             if params['skill'][tostring(i)].enabled then c = "v" end
