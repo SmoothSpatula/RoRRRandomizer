@@ -11,3 +11,8 @@
 ### v1.0.3
 * You can now enable/disable skills, these settings are saved
 * Improved random skill choice algorithm
+
+### v1.0.4
+* Tested all skills as commando, skill that crash the game are now disabled by default
+* Fixed the artifact randomizer not working
+* Changed the TomlHelper from a local file to a dependency 
