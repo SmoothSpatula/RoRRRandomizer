@@ -3,7 +3,7 @@ Adds a survivor, skill, and artifact randomizer when you start a game.
 
 You can set the mod options via ImGui ("INSERT" key) or by editing the it manually (found at ReturnOfModding/config/RoRRRandomizer/cfg.toml).
 
-As of v1.0.3 you can now enable/disable skills in the ImGui settings. 
+You can enable/disable skills in the ImGui settings. 
 
 You can make a custom build by enabling only 4 skills.
 
