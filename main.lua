@@ -1,13 +1,29 @@
--- RoRR Randomizer v1.0.7
+-- RoRR Randomizer v1.0.8
 -- SmoothSpatula
 
 mods.on_all_mods_loaded(function() for k, v in pairs(mods) do if type(v) == "table" and v.tomlfuncs then Toml = v end end end)
+
+mods.on_all_mods_loaded(function() 
+    -- find chatconsole script
+    for k, v in pairs(mods) do if type(v) == "table" and v.chatconsole then ChatConsole = v end end 
+    -- add the function you want to add
+    for k, v in pairs(mods) do
+        if type(v) == "table" and v.randomizermod then 
+            -- name in the function array, reference, usage text, command ("/example")
+            -- optional fields go at the end after mandatory fields (you can avoid doing this if you know what you're doing)
+            -- you can overwrite default commands by using the same name (here examplemod_examplefunc)
+            ChatConsole.add_function("RoRRRandomizer_randomize", v.randomize, "r", "<y>/r")
+        end 
+    end
+end)
 
 -- ========== Parameters ==========
 
 local MAX_ARTI = 14
 local MAX_SKILL = 4
 local is_init = false
+randomizermod = true -- this lets you locate your own mod later
+
 local params = {}
 
 function late_init()
@@ -95,9 +111,6 @@ function get_rand_artifacts(n)
     return fast_rnd_pick(ar, n)
 end
 
-
-
-
 function get_skills(min_id, max_id)
     local skills = gm.variable_global_get("class_skill")
     local tab = {}
@@ -106,6 +119,13 @@ function get_skills(min_id, max_id)
         tab[i..'']= {name =  skills[i][2], enabled = true}
     end 
     return tab
+end
+
+-- ========== Command ==========
+
+-- lets
+function randomize(actor)
+    set_random_char(false, true, true)
 end
 
 -- ========== ImGui ==========
@@ -164,9 +184,9 @@ end)
 -- ========== Main ==========
 
 -- for all players (if you're randomizing you're also randomizing your friends)
-function set_random_char()
+function set_random_char(rand_artifacts, rand_character, rand_skills)
     --set random artifacts
-    if params['randomize_artifacts'] then
+    if rand_artifacts then
         local rnd_arti = get_rand_artifacts(params['nb_arti'])
         for i = 1, params['nb_arti'] do
             local artifact = gm.variable_global_get("class_artifact")[rnd_arti[i]]
@@ -179,12 +199,12 @@ function set_random_char()
         local inst = gm.CInstance.instances_active[i]
         if inst.object_index == gm.constants.oP then
             --set random survivor
-            if params['randomize_character'] then
+            if rand_character then
                 local rnd_survivor = math.random(0,15)
                 gm.player_set_class(inst, rnd_survivor)
             end
             --set random player skills
-            if params['randomize_skills'] then
+            if rand_skills then
                 local rnd_skills = get_rand_skills(params['nb_skill'])
                 for i = 1, params['nb_skill'] do
                     gm.actor_skill_set(inst, i-1, rnd_skills[i])
@@ -205,6 +225,6 @@ end)
 gm.post_script_hook(gm.constants.actor_phy_on_landed, function(self, other, result, args)
     if new_game then
         new_game = false
-        set_random_char()
+        set_random_char(params['randomize_artifacts'], params['randomize_character'], params['randomize_skills'])
     end
 end)
