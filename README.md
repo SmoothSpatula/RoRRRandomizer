@@ -1,6 +1,9 @@
 # RoRRRandomizer
 Adds a survivor, skill, and artifact randomizer when you start a game.
 
+### New
+By launching in multiplayer, you can now type /r in chat to randomize your character at will. Requires [ChatConsole](https://thunderstore.io/c/risk-of-rain-returns/p/SmoothSpatula/ChatConsole/).
+<br><br><br>
 You can set the mod options via ImGui ("INSERT" key) or by editing `ReturnOfModding/config/RoRRRandomizer/cfg.toml`.
 
 You can enable/disable skills in the ImGui settings. 
