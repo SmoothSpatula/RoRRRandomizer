@@ -26,3 +26,6 @@
 
 ### v1.0.7
 * If you liked playing commando every game, too bad because it is fixed
+
+### v1.0.8
+* Added a /r command to randomize your character and skills at will using ChatConsole
